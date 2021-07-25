@@ -9,7 +9,7 @@ const pool = new Pool({
 });
 
 const getUsers = async (req, res) => {
-    const response = await pool.query('SELECT * FROM adm.paciente ORDER BY id ASC');
+    const response = await pool.query('SELECT * FROM adm.usuario ORDER BY id ASC');
     res.status(200).json(response.rows);
 };
 
@@ -20,23 +20,22 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-    const { name, correo } = req.body;
-    console.log("Respuesta ", req.body);
-    const response = await pool.query('INSERT INTO adm.usuario (nombre, correo) VALUES ($1, $2)', [name, correo]);
-    res.json({
+    const { nombre, correo } = req.body;
+    const response = await pool.query('INSERT INTO adm.usuario (nombre, correo) VALUES ($1, $2)', [nombre, correo]);
+    res.status(200).json({
         message: 'User Added successfully',
         body: {
-            user: {name, correo}
+            user: {nombre, correo}
         }
     })
 };
 
 const updateUser = async (req, res) => {
     const id = parseInt(req.params.id);
-    const { name, correo } = req.body;
+    const { nombre, correo } = req.body;
 
-    const response =await pool.query('UPDATE adm.usuario SET name = $1, correo = $2 WHERE id = $3', [
-        name,
+    const response =await pool.query('UPDATE adm.usuario SET nombre = $1, correo = $2 WHERE id = $3', [
+        nombre,
         correo,
         id
     ]);

@@ -11,9 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "pg": "^7.12.1"
+    "pg": "^7.18.2"
   },
   "devDependencies": {
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.4"
   }
 }
